@@ -39,6 +39,13 @@ class Blockchain {
 
     return hash;
   }
+
+  validProof(lastProof, proof) {
+    const guessHash = crypto
+      .createHmac(process.env.HASH_TYPE, process.env.CRYPTO_SECRET)
+      .update(`${lastProof}${proof}`);
+  }
+
   lastBlock() {
     return this.chain.slice(-1)[0];
   }
