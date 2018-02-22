@@ -46,6 +46,18 @@ class Blockchain {
       .update(`${lastProof}${proof}`);
   }
 
+  proofOfWork(lastProof) {
+    let proof = 0;
+    while (true) {
+      if (!this.validProof(lastProof, proof)) {
+        proof++;
+      } else {
+        break;
+      }
+    }
+    return proof;
+  }
+
   lastBlock() {
     return this.chain.slice(-1)[0];
   }
